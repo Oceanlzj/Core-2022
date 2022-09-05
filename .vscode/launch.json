@@ -8,7 +8,7 @@
             "name": "Debug (OpenOCD)",
             "servertype": "openocd",
             "cwd": "${workspaceRoot}",
-            "executable": "Build\\CoreA.ino.elf",
+            "executable": "Build\\Core.ino.elf",
             "device": "STM32F103RCT6",
             "configFiles": [
                 "interface/stlink-v2.cfg",
