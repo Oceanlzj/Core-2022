@@ -1,0 +1,1316 @@
+#include "pch.h"
+#include "Auto.h"
+#include <wiring_time.h>
+
+bool Load[5] = {false, false, false, false, false};
+
+//================================================
+//
+//  ######    ###     ####  ##  ##          #
+//    ##     ## ##   ##     ## ##         ###
+//    ##    ##   ##   ###   ####           ##
+//    ##    #######     ##  ## ##          ##
+//    ##    ##   ##  ####   ##  ##        ####
+//
+//================================================
+
+void Start()
+{
+  // ArmLow();
+  while (LineCounter < 1)
+  {
+    GoDistance(10, 10);
+    CountLine();
+  }
+  LineCounter = 0;
+  Stop();
+  delay(100);
+  Buzzer.Stop();
+  FrontLineAligment();
+
+  while (LineCounter < 1)
+  {
+    Moveline(30, 10);
+    CountLine();
+  }
+  LineCounter = 0;
+  // Buzzer.Stop();
+  Stop();
+
+  GoDistance(400, 400);
+  TurnLeft90();
+  // Rotate(-400);
+  // GoDistance(200, 140);
+
+  Stop();
+}
+
+void TaskOne_CollectPhase1()
+{
+  GoDistance(100, 100);
+  while (LineCounter_Right < 2)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+    // CountLineBoth();
+  }
+  LineCounter_Right = 0;
+  Buzzer.Stop();
+
+  GoDistance(400, 400);
+  TurnRight135();
+
+  ArmLow();
+  // LineCounter = 0;
+  ResetLineCounter();
+  ClearDistance();
+  while (LineCounter < 1)
+  {
+    Go(300);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+  Stop();
+
+  ClawClose_L(10);
+  ClawOpen(10);
+  ClawClose_R(10);
+  ClawOpen(10);
+  ClawClose(2);
+
+  delay(150);
+  Color Block2 = GetColor();
+  Load[Block2] = true;
+  delay(150);
+  DiskPosition(Block2);
+  ArmTop(10);
+  ClawOpen();
+  delay(1000);
+
+  // ArmLow();
+
+  uint32_t StartMillis = millis();
+
+  while (LineCounter_Left < 1 && LineCounter_Right < 1)
+  {
+    Go(-200);
+    CountLineBoth();
+    if (millis() - StartMillis < 500)
+    {
+      ResetLineCounter();
+    }
+  }
+  ResetLineCounter();
+  Stop();
+
+  TurnLeft45();
+
+  Stop();
+}
+
+void TaskOne_CollectPhase2()
+{
+  ResetLineCounter();
+  while (LineCounter_Right < 4)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+  Stop();
+  GoDistance(300, 300);
+
+  Stop();
+
+  TurnRight135();
+
+  ArmLow();
+  // LineCounter = 0;
+  ResetLineCounter();
+  ClearDistance();
+  while (LineCounter < 1)
+  {
+    Go(300);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+  Stop();
+
+  ClawClose_L(10);
+  ClawOpen(10);
+  ClawClose_R(10);
+  ClawOpen(10);
+  ClawClose(2);
+
+  delay(150);
+  Color Block1 = GetColor();
+  Load[Block1] = true;
+  delay(150);
+  DiskPosition(Block1);
+  ArmTop(10);
+  ClawOpen();
+  delay(1000);
+
+  // ArmLow();
+
+  uint32_t StartMillis = millis();
+
+  while (LineCounter_Left < 1 && LineCounter_Right < 1)
+  {
+    Go(-200);
+    CountLineBoth();
+    if (millis() - StartMillis < 1000)
+    {
+      ResetLineCounter();
+    }
+  }
+  ResetLineCounter();
+  Stop();
+
+  TurnLeft45();
+
+  Stop();
+}
+
+void TaskOne_CollectPhase3()
+{
+  ClearDistance();
+  ResetLineCounter();
+  uint32_t StartMillis = millis();
+  while (LineCounter_Right < 3)
+  {
+    LeftLine(300, 100);
+    CountLine_Right();
+    if (millis() - StartMillis < 1000)
+    {
+      ResetLineCounter();
+    }
+  }
+  ResetLineCounter();
+  while (LineCounter_Right < 1)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+  }
+  Stop();
+  GoDistance(400, 400);
+
+  Stop();
+
+  TurnRight135();
+  ArmLow();
+  // LineCounter = 0;
+  ResetLineCounter();
+  ClearDistance();
+  while (LineCounter < 1)
+  {
+    Go(300);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+  Stop();
+
+  // ClawClose(2);
+
+  ClawClose_L(10);
+  ClawOpen(10);
+  ClawClose_R(10);
+  ClawOpen(10);
+  ClawClose(2);
+  // ClawClose_R(10);
+  delay(150);
+  Color Block4 = GetColor();
+  Load[Block4] = true;
+  delay(150);
+  DiskPosition(Block4);
+  ArmTop(10);
+  ClawOpen();
+  delay(1000);
+
+  // ArmLow();
+
+  StartMillis = millis();
+
+  while (LineCounter_Left < 1 && LineCounter_Right < 1)
+  {
+    Go(-200);
+    CountLineBoth();
+    if (millis() - StartMillis < 500)
+    {
+      ResetLineCounter();
+    }
+  }
+  ResetLineCounter();
+  Stop();
+
+  TurnLeft45();
+
+  Stop();
+}
+
+void TaskOne_CollectPhase4()
+{
+  ResetLineCounter();
+  while (LineCounter_Right < 4)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+  Stop();
+  GoDistance(400, 400);
+
+  Stop();
+
+  TurnRight135();
+  ArmLow();
+
+  // LineCounter = 0;
+  ResetLineCounter();
+  ClearDistance();
+  while (LineCounter < 1)
+  {
+    Go(300);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+  Stop();
+
+  ClawClose_L(10);
+  ClawOpen(10);
+  ClawClose_R(10);
+  ClawOpen(10);
+  ClawClose(2);
+
+  delay(150);
+  Color Block3 = GetColor();
+  Load[Block3] = true;
+  delay(150);
+  DiskPosition(Block3);
+  ArmTop(10);
+  ClawOpen();
+  delay(1000);
+
+  // ArmLow();
+
+  uint32_t StartMillis = millis();
+
+  while (LineCounter_Left < 1 && LineCounter_Right < 1)
+  {
+    Go(-200);
+    CountLineBoth();
+    if (millis() - StartMillis < 1000)
+    {
+      ResetLineCounter();
+    }
+  }
+  ResetLineCounter();
+  Stop();
+
+  TurnLeft45();
+
+  Stop();
+}
+
+void BackToCenter()
+{
+  ResetLineCounter();
+  while (LineCounter_Right < 2)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+  Stop();
+  GoDistance(400, 400);
+
+  Stop();
+
+  TurnRight90();
+
+  ResetLineCounter();
+  while (LineCounter < 4)
+  {
+    Moveline(300, 100);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 4 || LineCounter_Right >= 4)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+  Stop();
+  GoDistance(150, 150);
+
+  Stop();
+}
+
+// White
+void TaskOne_PlacePhase1()
+{
+  // if loaded go else to blue
+  if (Load[WHITE])
+  {
+    DiskPosition(WHITE);
+    ClawOpen();
+    ArmTop(10);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+    ClawClose(2);
+
+    ResetLineCounter();
+    ClearDistance();
+    uint32_t StartMillis = millis();
+    while (LineCounter < 1)
+    {
+      Moveline(100, 50);
+      CountLine();
+      CountLineBoth();
+      if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+      {
+        break;
+      }
+      if (millis() - StartMillis < 500)
+      {
+        ResetLineCounter();
+      }
+    }
+    ResetLineCounter();
+    Stop();
+    GoDistance(-150, -150);
+    Stop();
+
+    ArmLow(10);
+    ClawOpen(2);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+
+    GoDistance(-200, -200);
+    ArmTop();
+
+    // TurnRight180();
+
+    StartMillis = millis();
+    while (LineCounter < 1)
+    {
+      Backline(100, 50);
+      CountLine();
+      CountLineBoth();
+      if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+      {
+        break;
+      }
+      if (millis() - StartMillis < 500)
+      {
+        ResetLineCounter();
+      }
+    }
+    ResetLineCounter();
+    GoDistance(100, 100);
+
+    Stop();
+  }
+
+  TurnLeft90(); // face blue
+
+  Stop();
+}
+
+void TaskOne_PlacePhase2()
+{
+  // if loaded go else to blue
+  if (Load[BLUE])
+  {
+    DiskPosition(BLUE);
+    ClawOpen();
+    ArmTop(10);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+    ClawClose(2);
+
+    ResetLineCounter();
+    ClearDistance();
+    uint32_t StartMillis = millis();
+    while (LineCounter < 1)
+    {
+      Moveline(100, 50);
+      CountLine();
+      CountLineBoth();
+      if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+      {
+        break;
+      }
+      if (millis() - StartMillis < 500)
+      {
+        ResetLineCounter();
+      }
+    }
+    ResetLineCounter();
+    Stop();
+    GoDistance(-150, -150);
+    Stop();
+
+    ArmLow(10);
+    ClawOpen(2);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+
+    GoDistance(-200, -200);
+    ArmTop();
+
+    // TurnRight180();
+
+    StartMillis = millis();
+    while (LineCounter < 1)
+    {
+      Backline(100, 50);
+      CountLine();
+      CountLineBoth();
+      if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+      {
+        break;
+      }
+      if (millis() - StartMillis < 500)
+      {
+        ResetLineCounter();
+      }
+    }
+    ResetLineCounter();
+    GoDistance(100, 100);
+
+    Stop();
+  }
+
+  TurnRight180(); // face red
+
+  Stop();
+}
+
+void TaskOne_PlacePhase3()
+{
+  // if loaded go else to blue
+  if (Load[RED])
+  {
+    // TurnLeft90();
+    DiskPosition(RED);
+    ClawOpen();
+    ArmTop(10);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+    ClawClose(2);
+
+    ResetLineCounter();
+    ClearDistance();
+    uint32_t StartMillis = millis();
+    while (LineCounter < 1)
+    {
+      Moveline(100, 50);
+      CountLine();
+      CountLineBoth();
+      if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+      {
+        break;
+      }
+      if (millis() - StartMillis < 500)
+      {
+        ResetLineCounter();
+      }
+    }
+    ResetLineCounter();
+    Stop();
+    GoDistance(-150, -150);
+    Stop();
+
+    ArmLow(10);
+    ClawOpen(2);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+
+    GoDistance(-200, -200);
+    ArmTop();
+
+    // TurnRight180();
+
+    StartMillis = millis();
+    while (LineCounter < 1)
+    {
+      Backline(100, 50);
+      CountLine();
+      CountLineBoth();
+      if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+      {
+        break;
+      }
+      if (millis() - StartMillis < 500)
+      {
+        ResetLineCounter();
+      }
+    }
+    ResetLineCounter();
+    GoDistance(100, 100);
+
+    Stop();
+  }
+
+  TurnLeft90(); // face white
+
+  Stop();
+}
+
+void TaskOne_PlacePhase4()
+{
+  // front cross line
+  uint32_t StartMillis = millis();
+  while (millis() - StartMillis < 500)
+  {
+    Moveline(100, 50);
+  }
+  Stop();
+  delay(200);
+
+  // back to black position
+  ResetLineCounter();
+  while (LineCounter < 2)
+  {
+    Backline(100, 50);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 2 && LineCounter_Right >= 2)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+
+  // unload black
+  if (Load[BLACK])
+  {
+    ClawOpen();
+    DiskPosition(BLACK);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+    ClawClose(2);
+    GoDistance(-250, -250);
+
+    ArmLow(10);
+    ClawOpen(2);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+
+    GoDistance(-200, -200);
+
+    ArmTop(10);
+
+    Stop();
+  }
+
+  // back to Green
+  ResetLineCounter();
+  StartMillis = millis();
+  while (LineCounter < 1)
+  {
+    Backline(100, 50);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+    if (millis() - StartMillis < 800)
+    {
+      ResetLineCounter();
+    }
+  }
+  ResetLineCounter();
+
+  if (Load[GREEN])
+  {
+    ClawOpen();
+    DiskPosition(GREEN);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+    ClawClose(2);
+    GoDistance(-230, -230);
+
+    ArmLow(10);
+    ClawOpen(2);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+
+    GoDistance(-200, -200);
+
+    ArmTop(10);
+
+    Stop();
+  }
+
+  Stop();
+}
+
+void BackToHome()
+{
+  ResetLineCounter();
+  ClearDistance();
+  while (LineCounter < 2)
+  {
+    Backline(100, 50);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 2 && LineCounter_Right >= 2)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+
+  GoDistance(-200, -200);
+
+  Stop();
+}
+
+//==================================================
+//
+//  ######    ###     ####  ##  ##         ####
+//    ##     ## ##   ##     ## ##         #    #
+//    ##    ##   ##   ###   ####             ##
+//    ##    #######     ##  ## ##          ##
+//    ##    ##   ##  ####   ##  ##        ######
+//
+//==================================================
+const uint8_t PLANS[16][5] =
+    {{1, 2, 3, 4, 5},
+     {2, 1, 3, 4, 5},
+     {2, 1, 4, 3, 5},
+     {5, 2, 1, 3, 4},
+     {2, 3, 5, 1, 4},
+     {1, 3, 5, 2, 4},
+     {5, 4, 1, 2, 3},
+     {4, 2, 5, 1, 3},
+     {2, 4, 1, 5, 3},
+     {1, 3, 5, 4, 2},
+     {3, 5, 4, 1, 2},
+     {4, 3, 1, 5, 2},
+     {2, 3, 5, 4, 1},
+     {3, 4, 2, 5, 1},
+     {5, 2, 4, 3, 1},
+     {4, 5, 3, 2, 1}};
+
+int8_t Plan = -1;
+
+void TasKTwo_Start()
+{
+  while (Plan == -1)
+  {
+    Plan = GetQR();
+  }
+
+  Start();
+}
+
+void TaskTwo_MovePhase1()
+{
+  GoDistance(100, 100);
+  while (LineCounter_Right < 2)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+    // CountLineBoth();
+  }
+  LineCounter_Right = 0;
+  Buzzer.Stop();
+
+  GoDistance(400, 400);
+  TurnRight90();
+
+  Stop();
+}
+
+void TaskTwo_MovePhase2()
+{
+  ResetLineCounter();
+  while (LineCounter_Right < 4)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+  Stop();
+  GoDistance(400, 400);
+  TurnRight90();
+
+  Stop();
+}
+
+void TaskTwo_MovePhase3()
+{
+  ClearDistance();
+  ResetLineCounter();
+  uint32_t StartMillis = millis();
+  while (LineCounter_Right < 2)
+  {
+    LeftLine(300, 100);
+    CountLine_Right();
+    if (millis() - StartMillis < 1000)
+    {
+      ResetLineCounter();
+    }
+  }
+  ResetLineCounter();
+  Stop();
+  GoDistance(900, 900);
+
+  GoDistance(-800, -200);
+  GoDistance(-260, 80);
+
+  ResetLineCounter();
+  while (LineCounter < 1)
+  {
+    Backline(100, 50);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+
+  FrontLineAligment();
+
+  Stop();
+}
+
+void TaskTwo_Collect()
+{
+  // collect 2
+  ArmLow();
+  GoDistance(200, 200);
+  ClawClose_L(2);
+  DiskPosition(1);
+  while (LineCounter < 1)
+  {
+    Backline(100, 50);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+  ClawOpen(2);
+  ClawClose(2);
+  ArmTop(10);
+  ClawOpen(2);
+
+  // collect 3
+  ArmLow();
+  GoDistance(200, 200);
+  ClawClose_R(2);
+  DiskPosition(2);
+  while (LineCounter < 1)
+  {
+    Backline(100, 50);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+  ClawOpen(2);
+  ClawClose(2);
+  ArmTop(10);
+  ClawOpen(2);
+
+  // collect 1
+  ArmLow();
+  GoDistance(400, 400);
+  ClawClose_L(2);
+  DiskPosition(0);
+  while (LineCounter < 1)
+  {
+    Backline(100, 50);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+  ClawOpen(2);
+  ClawClose(2);
+  ArmTop(10);
+  ClawOpen(2);
+
+  // collect 4
+  ArmLow();
+  GoDistance(400, 400);
+  ClawClose_R(2);
+  DiskPosition(3);
+  while (LineCounter < 1)
+  {
+    Backline(100, 50);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+  ClawOpen(2);
+  ClawClose(2);
+  ArmTop(10);
+  ClawOpen(2);
+
+  // collect 5
+  ArmLow();
+  GoDistance(600, 600);
+  ClawClose_L(10);
+  ClawOpen(10);
+  ClawClose_R(10);
+  ClawOpen(10);
+  ClawClose(2);
+  DiskPosition(4);
+  while (LineCounter < 1)
+  {
+    Backline(100, 50);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
+  }
+  ResetLineCounter();
+  ArmTop(10);
+  ClawOpen(2);
+
+  GoDistance(400, 400);
+  TurnLeft90();
+
+  Stop();
+}
+
+void TaskTwo_PlacePhase1()
+{
+  GoDistance(100, 100);
+  while (LineCounter_Left < 2)
+  {
+    Moveline(300, 100);
+    CountLine_Left();
+    // CountLineBoth();
+  }
+  LineCounter_Left = 0;
+  Buzzer.Stop();
+
+  GoDistance(-200, -200);
+  Stop();
+
+  DiskPosition(PLANS[Plan][0] - 1);
+  delay(1000);
+  ClawClose_R(2);
+  ClawOpen(2);
+  ClawClose_L(2);
+  ClawOpen(2);
+  ClawClose(2);
+
+  ArmLow(10);
+  ClawOpen(2);
+
+  ClawClose_R(2);
+  ClawOpen(2);
+  ClawClose_L(2);
+  ClawOpen(2);
+
+  GoDistance(-200, -200);
+  ArmTop();
+  TurnLeft180();
+
+  Stop();
+}
+
+void TaskTwo_PlacePhase2()
+{
+  ResetLineCounter();
+  while (LineCounter_Right < 4)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+  Stop();
+  GoDistance(400, 400);
+
+  TurnLeft90();
+
+  while (LineCounter_Left < 1)
+  {
+    Backline(100, 50);
+    CountLine_Left();
+    // CountLineBoth();
+  }
+  LineCounter_Left = 0;
+  Buzzer.Stop();
+  GoDistance(-230, -230);
+  Stop();
+
+  DiskPosition(PLANS[Plan][1] - 1);
+  delay(1000);
+  ClawClose_R(2);
+  ClawOpen(2);
+  ClawClose_L(2);
+  ClawOpen(2);
+  ClawClose(2);
+
+  ArmLow(10);
+  ClawOpen(2);
+
+  ClawClose_R(2);
+  ClawOpen(2);
+  ClawClose_L(2);
+  ClawOpen(2);
+
+  GoDistance(-200, -200);
+  ArmTop();
+  TurnLeft180();
+
+  Stop();
+}
+
+void TaskTwo_PlacePhase3()
+{
+  ResetLineCounter();
+  while (LineCounter_Right < 4)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+  Stop();
+  GoDistance(400, 400);
+
+  TurnLeft90();
+
+  while (LineCounter_Left < 1)
+  {
+    Backline(100, 50);
+    CountLine_Left();
+    // CountLineBoth();
+  }
+  LineCounter_Left = 0;
+  Buzzer.Stop();
+  GoDistance(-230, -230);
+  Stop();
+
+  DiskPosition(PLANS[Plan][2] - 1);
+  delay(1000);
+  ClawClose_R(2);
+  ClawOpen(2);
+  ClawClose_L(2);
+  ClawOpen(2);
+  ClawClose(2);
+
+  ArmLow(10);
+  ClawOpen(2);
+
+  ClawClose_R(2);
+  ClawOpen(2);
+  ClawClose_L(2);
+  ClawOpen(2);
+
+  GoDistance(-200, -200);
+  ArmTop();
+  TurnLeft180();
+
+  Stop();
+}
+
+void TaskTwo_PlacePhase4()
+{
+  ResetLineCounter();
+  while (LineCounter_Right < 4)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+  Stop();
+
+  GoDistance(-200, -200);
+  Stop();
+
+  DiskPosition(PLANS[Plan][3] - 1);
+  delay(1000);
+  ClawClose_R(2);
+  ClawOpen(2);
+  ClawClose_L(2);
+  ClawOpen(2);
+  ClawClose(2);
+
+  ArmLow(10);
+  ClawOpen(2);
+
+  ClawClose_R(2);
+  ClawOpen(2);
+  ClawClose_L(2);
+  ClawOpen(2);
+
+  GoDistance(-200, -200);
+  ArmTop();
+  TurnLeft180();
+
+  Stop();
+}
+
+void FinalHome()
+{
+  while (LineCounter_Left < 2)
+  {
+    Moveline(300, 100);
+    CountLine_Left();
+    // CountLineBoth();
+  }
+  LineCounter_Left = 0;
+  Buzzer.Stop();
+  GoDistance(400, 400);
+
+  TurnLeft90();
+
+  BackToHome();
+  Stop();
+}
+
+/*
+void TaskOne_CollectPhase1()
+{
+  while (LineCounter_Right < 1)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+    // CountLineBoth();
+  }
+  LineCounter_Right = 0;
+  Buzzer.Stop();
+
+  Stop();
+
+  ClawClose(2);
+  delay(150);
+  Color Block2 = GetColor();
+  delay(150);
+  DiskPosition(Block2);
+  ArmTop(10);
+  ClawOpen();
+  delay(1000);
+
+  ArmLow();
+
+  // GoDistance(200, 100);
+  LineCounter_Left = 0;
+  while (LineCounter_Left < 1)
+  {
+    Moveline(300, 100);
+    CountLine_Left();
+  }
+  LineCounter_Left = 0;
+  Buzzer.Stop();
+
+  LineCounter_Right = 0;
+  while (LineCounter_Right < 1)
+  {
+    Moveline_Edge(300, 100);
+    CountLine_Right();
+  }
+  LineCounter_Right = 0;
+  Buzzer.Stop();
+
+  // Rotate(80);
+  // GoDistance(575, 450);
+  // GoDistance(300, 300);
+  Stop();
+}
+
+void TaskOne_CollectPhase2()
+{
+  // GoDistance(220, 80);
+  while (LineCounter_Right < 1)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+  }
+  LineCounter_Right = 0;
+
+  Stop();
+
+  ClawClose(2);
+  delay(300);
+  Color Block1 = GetColor();
+  delay(300);
+  DiskPosition(Block1);
+  ArmTop(10);
+  ClawOpen();
+  delay(1000);
+
+  // ArmLow();
+
+  GoDistance(200, 50);
+  while (LineCounter_Right < 1)
+  {
+    LeftLine(300, 100);
+    CountLine_Right();
+  }
+  LineCounter_Right = 0;
+
+  Rotate(50);
+  // GoDistance(200, 200);
+
+  Stop();
+}
+
+void TaskOne_CollectPhase3()
+{
+  ArmLow();
+  while (LineCounter_Right < 1)
+  {
+    Moveline(200, 150);
+    CountLine_Right();
+  }
+  LineCounter_Right = 0;
+  GoDistance(100, 50);
+  Stop();
+
+  ClawClose(2);
+  delay(300);
+  Color Block2 = GetColor();
+  delay(300);
+  DiskPosition(Block2);
+  ArmTop(10);
+  ClawOpen();
+  delay(1000);
+
+  ArmLow();
+
+  GoDistance(300, 100);
+  while (LineCounter_Right < 1)
+  {
+    Moveline(500, 300);
+    CountLine_Right();
+  }
+  LineCounter_Right = 0;
+
+  Rotate(100);
+  GoDistance(240, 220);
+
+  Stop();
+}
+
+void TaskOne_CollectPhase4()
+{
+  while (LineCounter_Right < 1)
+  {
+    Moveline(200, 150);
+    CountLine_Right();
+  }
+  LineCounter_Right = 0;
+
+  Stop();
+
+  ClawClose(2);
+  delay(300);
+  Color Block2 = GetColor();
+  delay(300);
+  DiskPosition(Block2);
+  ArmTop(10);
+  ClawOpen();
+  delay(1000);
+
+  ArmLow();
+
+  GoDistance(200, 100);
+  while (LineCounter_Right < 1)
+  {
+    Moveline(500, 300);
+    CountLine_Right();
+  }
+  LineCounter_Right = 0;
+
+  Rotate(60);
+  GoDistance(500, 500);
+  TurnRight90();
+
+  Stop();
+}
+
+void TaskOne_PlacePhase1()
+{
+  GoDistance(1000, 1000);
+  LineCounter = 0;
+  while (LineCounter < 3)
+  {
+    Moveline(200, 100);
+    CountLine();
+    CountLineBoth();
+    if (LineCounter_Left > 3 || LineCounter_Right > 3)
+    {
+      break;
+    }
+  }
+
+  Stop();
+}
+*/

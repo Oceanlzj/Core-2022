@@ -1,0 +1,24 @@
+{
+  "files.associations": {
+    "*.asm": "assembly",
+    "arduino.h": "c",
+    "pinconfigured.h": "c",
+    "array": "cpp",
+    "deque": "cpp",
+    "list": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "vector": "cpp",
+    "string_view": "cpp",
+    "initializer_list": "cpp",
+    "ranges": "cpp",
+    "span": "cpp",
+    "xhash": "cpp",
+    "xstring": "cpp",
+    "xutility": "cpp",
+    "cstdlib": "cpp",
+    "typeinfo": "cpp",
+    "iosfwd": "cpp"
+  },
+  "EIDE.SerialPortMonitor.BaudRate": 115200
+}

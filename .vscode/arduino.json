@@ -1,0 +1,7 @@
+{
+    "configuration": "pnum=GENERIC_F103RETX,upload_method=swdMethod,xserial=generic,usb=none,xusb=FS,opt=osstd,dbg=enable_sym,rtlib=nano",
+    "board": "STMicroelectronics:stm32:GenF1",
+    "output": "./Build",
+    "sketch": "CoreA.ino",
+    "port": "COM13"
+}
