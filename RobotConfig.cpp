@@ -41,5 +41,3 @@ Scanner QRScanner(&Serial4, PB_8);
 Beeper Buzzer(PB9);
 
 Adafruit_TCS34725 ColorSensor(TCS34725_INTEGRATIONTIME_614MS, TCS34725_GAIN_1X);
-//Adafruit_HMC5883_Unified MagSensor(12345);
-//Adafruit_NeoPixel RGBLights(25, PB12, NEO_GRB + NEO_KHZ800);

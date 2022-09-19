@@ -682,6 +682,15 @@ void ArmLow()
   Svo_Arm = ARM_LOW;
   delay(1000);
 }
+
+void ArmPush()
+{
+  Svo_Arm = ARM_PUSH;
+  delay(100);
+  Svo_Arm = ARM_TOP;
+  delay(100);
+}
+
 void ArmLow(uint8_t spd)
 {
   Svo_Arm.Setpos(ARM_LOW, spd);

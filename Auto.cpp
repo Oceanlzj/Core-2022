@@ -90,6 +90,7 @@ void TaskOne_CollectPhase1()
   DiskPosition(Block2);
   ArmTop(10);
   ClawOpen();
+  ArmPush();
   delay(1000);
 
   // ArmLow();
@@ -159,6 +160,7 @@ void TaskOne_CollectPhase2()
   DiskPosition(Block1);
   ArmTop(10);
   ClawOpen();
+  ArmPush();
   delay(1000);
 
   // ArmLow();
@@ -240,6 +242,7 @@ void TaskOne_CollectPhase3()
   DiskPosition(Block4);
   ArmTop(10);
   ClawOpen();
+  ArmPush();
   delay(1000);
 
   // ArmLow();
@@ -309,6 +312,7 @@ void TaskOne_CollectPhase4()
   DiskPosition(Block3);
   ArmTop(10);
   ClawOpen();
+  ArmPush();
   delay(1000);
 
   // ArmLow();
@@ -852,6 +856,7 @@ void TaskTwo_Collect()
   ClawOpen(2);
   ClawClose(2);
   ArmTop(10);
+  ArmPush();
   ClawOpen(2);
 
   // collect 3
@@ -873,6 +878,7 @@ void TaskTwo_Collect()
   ClawOpen(2);
   ClawClose(2);
   ArmTop(10);
+  ArmPush();
   ClawOpen(2);
 
   // collect 1
@@ -894,6 +900,7 @@ void TaskTwo_Collect()
   ClawOpen(2);
   ClawClose(2);
   ArmTop(10);
+  ArmPush();
   ClawOpen(2);
 
   // collect 4
@@ -915,6 +922,7 @@ void TaskTwo_Collect()
   ClawOpen(2);
   ClawClose(2);
   ArmTop(10);
+  ArmPush();
   ClawOpen(2);
 
   // collect 5
@@ -938,6 +946,7 @@ void TaskTwo_Collect()
   }
   ResetLineCounter();
   ArmTop(10);
+  ArmPush();
   ClawOpen(2);
 
   GoDistance(400, 400);

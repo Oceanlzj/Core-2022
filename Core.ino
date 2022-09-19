@@ -64,6 +64,21 @@ void setup()
 
 void loop()
 {
+  /*
+  DiskPosition(0);
+  ArmLow();
+
+  ClawOpen();
+  delay(1000);
+  ClawClose();
+  delay(1000);
+
+  ArmTop();
+  delay(1000);
+  ClawOpen();
+  delay(1000);
+  ClawClose();
+  delay(1000);
   // Backline(100, 50);
   /*
     for (int i = 0; i < 5; i++)
