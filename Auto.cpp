@@ -124,7 +124,7 @@ void TaskOne_CollectPhase2()
   }
   ResetLineCounter();
   Stop();
-  GoDistance(300, 300);
+  GoDistance(400, 400);
 
   Stop();
 
@@ -179,6 +179,8 @@ void TaskOne_CollectPhase2()
   ResetLineCounter();
   Stop();
 
+  GoDistance(200, 200);
+  Stop();
   TurnLeft45();
 
   Stop();
@@ -249,7 +251,7 @@ void TaskOne_CollectPhase3()
 
   StartMillis = millis();
 
-  while (LineCounter_Left < 1 && LineCounter_Right < 1)
+  while (LineCounter_Left < 1 || LineCounter_Right < 1)
   {
     Go(-200);
     CountLineBoth();
@@ -405,7 +407,7 @@ void TaskOne_PlacePhase1()
     }
     ResetLineCounter();
     Stop();
-    GoDistance(-150, -150);
+    GoDistance(-130, -130);
     Stop();
 
     ArmLow(10);
@@ -481,7 +483,7 @@ void TaskOne_PlacePhase2()
     }
     ResetLineCounter();
     Stop();
-    GoDistance(-150, -150);
+    GoDistance(-130, -130);
     Stop();
 
     ArmLow(10);
@@ -558,7 +560,7 @@ void TaskOne_PlacePhase3()
     }
     ResetLineCounter();
     Stop();
-    GoDistance(-150, -150);
+    GoDistance(-130, -130);
     Stop();
 
     ArmLow(10);
@@ -790,7 +792,7 @@ void TaskTwo_MovePhase2()
   }
   ResetLineCounter();
   Stop();
-  GoDistance(400, 400);
+  GoDistance(300, 300);
   TurnRight90();
 
   Stop();
@@ -856,8 +858,8 @@ void TaskTwo_Collect()
   ClawOpen(2);
   ClawClose(2);
   ArmTop(10);
-  ArmPush();
   ClawOpen(2);
+  ArmPush();
 
   // collect 3
   ArmLow();
@@ -878,8 +880,8 @@ void TaskTwo_Collect()
   ClawOpen(2);
   ClawClose(2);
   ArmTop(10);
-  ArmPush();
   ClawOpen(2);
+  ArmPush();
 
   // collect 1
   ArmLow();
@@ -900,8 +902,8 @@ void TaskTwo_Collect()
   ClawOpen(2);
   ClawClose(2);
   ArmTop(10);
-  ArmPush();
   ClawOpen(2);
+  ArmPush();
 
   // collect 4
   ArmLow();
@@ -922,8 +924,8 @@ void TaskTwo_Collect()
   ClawOpen(2);
   ClawClose(2);
   ArmTop(10);
-  ArmPush();
   ClawOpen(2);
+  ArmPush();
 
   // collect 5
   ArmLow();
@@ -946,8 +948,8 @@ void TaskTwo_Collect()
   }
   ResetLineCounter();
   ArmTop(10);
-  ArmPush();
   ClawOpen(2);
+  ArmPush();
 
   GoDistance(400, 400);
   TurnLeft90();
@@ -967,7 +969,7 @@ void TaskTwo_PlacePhase1()
   LineCounter_Left = 0;
   Buzzer.Stop();
 
-  GoDistance(-200, -200);
+  GoDistance(-180, -180);
   Stop();
 
   DiskPosition(PLANS[Plan][0] - 1);
@@ -1015,7 +1017,7 @@ void TaskTwo_PlacePhase2()
   }
   LineCounter_Left = 0;
   Buzzer.Stop();
-  GoDistance(-230, -230);
+  GoDistance(-200, -200);
   Stop();
 
   DiskPosition(PLANS[Plan][1] - 1);
@@ -1063,7 +1065,7 @@ void TaskTwo_PlacePhase3()
   }
   LineCounter_Left = 0;
   Buzzer.Stop();
-  GoDistance(-230, -230);
+  GoDistance(-200, -200);
   Stop();
 
   DiskPosition(PLANS[Plan][2] - 1);
@@ -1100,7 +1102,7 @@ void TaskTwo_PlacePhase4()
   ResetLineCounter();
   Stop();
 
-  GoDistance(-200, -200);
+  GoDistance(-180, -180);
   Stop();
 
   DiskPosition(PLANS[Plan][3] - 1);

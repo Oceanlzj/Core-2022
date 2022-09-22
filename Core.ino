@@ -25,7 +25,6 @@ void setup()
   //
   //=======================================
   delay(1000);
-/*
   Start();
 
   TaskOne_CollectPhase1();
@@ -51,7 +50,7 @@ void setup()
   TaskTwo_Collect();
 
   TaskTwo_PlacePhase1();
-  TaskTwo_PlacePhase2();*/
+  TaskTwo_PlacePhase2();
   TaskTwo_PlacePhase3();
   TaskTwo_PlacePhase4();
 

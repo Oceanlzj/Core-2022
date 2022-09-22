@@ -82,7 +82,7 @@ void RefreshWing_L()
 {
   if (LeftDeBoucing)
   {
-    if (millis() - LeftMills > 10)
+    if (millis() - LeftMills > 20)
     {
       if (LT_LWNG.OnLine())
       {
@@ -115,7 +115,7 @@ void RefreshWing_R()
 {
   if (RightDeBoucing)
   {
-    if (millis() - RightMills > 10)
+    if (millis() - RightMills > 20)
     {
       if (LT_RWNG.OnLine())
       {
@@ -686,9 +686,9 @@ void ArmLow()
 void ArmPush()
 {
   Svo_Arm = ARM_PUSH;
-  delay(100);
+  delay(500);
   Svo_Arm = ARM_TOP;
-  delay(100);
+  delay(300);
 }
 
 void ArmLow(uint8_t spd)
@@ -697,7 +697,7 @@ void ArmLow(uint8_t spd)
   delay(500);
 }
 
-const uint16_t DISK_POS[6] = {560, 1020, 1520, 2000, 2480, 0};
+const uint16_t DISK_POS[6] = {560, 1020, 1520, 2050, 2480, 0};
 void DiskPosition(Color Color)
 {
   Svo_Disk = DISK_POS[Color];

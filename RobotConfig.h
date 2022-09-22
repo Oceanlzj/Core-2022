@@ -13,14 +13,14 @@
 #include "ServoWithStep.h"
 
 #define SPEEDFIXINDEX 1
-#define DISTANCEFIXINDEX 1
+#define DISTANCEFIXINDEX 1.02
 
 #define R_Close 1400
 #define R_Open 2200
 #define L_Close 1700
 #define L_Open 800
 #define ARM_TOP 590
-#define ARM_PUSH 560
+#define ARM_PUSH 530
 #define ARM_LOW 1900
 
 #define LT_THRESHOLD 200
