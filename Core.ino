@@ -24,7 +24,9 @@ void setup()
   //  ##   ##   #####     ##     #####
   //
   //=======================================
-  delay(1000);
+  
+  //delay(1000);
+  
   Start();
 
   TaskOne_CollectPhase1();
@@ -40,6 +42,7 @@ void setup()
   TaskOne_PlacePhase4();
 
   BackToHome();
+  
 
   TasKTwo_Start();
 
