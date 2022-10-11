@@ -4,16 +4,14 @@
 Beeper::Beeper(uint32_t Att) : AttachedPin(Att)
 {
   pinMode(AttachedPin, OUTPUT);
-   //analogWriteResolution()
 }
 
-void Beeper::Beep(uint32_t Freq)
+void Beeper::Beep(uint32_t Freq, uint32_t Duration)
 {
-  analogWriteFrequency(Freq);
-  analogWrite(AttachedPin, 230);
+  tone(AttachedPin, Freq, Duration);
 }
 
 void Beeper::Stop()
 {
-  analogWrite(AttachedPin, 0);
+  noTone(AttachedPin);
 }

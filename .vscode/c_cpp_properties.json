@@ -19,7 +19,7 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "d:\\Desktop\\Banyun2022\\Core",
+                "d:\\Banyun2022\\Core",
                 "C:\\Users\\Ocean\\AppData\\Local\\Arduino15\\packages\\STMicroelectronics\\hardware\\stm32\\2.3.0\\cores\\arduino\\avr",
                 "C:\\Users\\Ocean\\AppData\\Local\\Arduino15\\packages\\STMicroelectronics\\hardware\\stm32\\2.3.0\\cores\\arduino\\stm32",
                 "C:\\Users\\Ocean\\AppData\\Local\\Arduino15\\packages\\STMicroelectronics\\hardware\\stm32\\2.3.0\\cores\\arduino\\stm32\\LL",
@@ -63,9 +63,6 @@
             "forcedInclude": [
                 "C:\\Users\\Ocean\\AppData\\Local\\Arduino15\\packages\\STMicroelectronics\\hardware\\stm32\\2.3.0\\cores\\arduino\\Arduino.h"
             ],
-            "browse": {
-                "limitSymbolsToIncludedHeaders": false
-            },
             "cStandard": "c11",
             "cppStandard": "c++14",
             "defines": [

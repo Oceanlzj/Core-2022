@@ -9,7 +9,7 @@ private:
 public:
   Beeper(uint32_t Att);
 
-  void Beep(uint32_t Freq);
+  void Beep(uint32_t Freq, uint32_t Duration = 100);
   void Stop();
   
 
