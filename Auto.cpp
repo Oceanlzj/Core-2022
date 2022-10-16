@@ -3,7 +3,7 @@
 #include "Auto.h"
 #include <wiring_time.h>
 
-bool Load[5] = {true, true, true, true, false};
+bool Load[5] = {false, false, false, false, false};
 Color EPosition = UNRECON;
 //================================================
 //
@@ -202,10 +202,15 @@ void TaskOne_CollectPhase3()
     }
   }
   ResetLineCounter();
+  StartMillis = millis();
   while (LineCounter_Right < 1)
   {
     Moveline(300, 100);
     CountLine_Right();
+    if (millis() - StartMillis < 1000)
+    {
+      ResetLineCounter();
+    }
   }
   Stop();
   GoDistance(400, 400);
@@ -946,11 +951,16 @@ void TaskTwo_Collect()
   ClawOpen(10);
   ClawClose(2);
   DiskPosition(4);
+  uint32_t StartMillis = millis();
   while (LineCounter < 1)
   {
     Backline(100, 50);
     CountLine();
     CountLineBoth();
+    if (millis() - StartMillis < 300)
+    {
+      ResetLineCounter();
+    }
     if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
     {
       break;
@@ -1020,27 +1030,35 @@ void TaskTwo_Collect()
   if (EPosition != BLUE)
   {
     TurnLeft90();
+
+    StartMillis = millis();
+    while (LineCounter_Left < 1)
+    {
+      Backline(100, 50);
+      CountLine_Left();
+      if (millis() - StartMillis < 300)
+      {
+        ResetLineCounter();
+      }
+    }
+    ResetLineCounter();
   }
   else
   {
     TurnRight90();
+    StartMillis = millis();
+    while (LineCounter_Right < 1)
+    {
+      Backline(100, 50);
+      CountLine_Right();
+      if (millis() - StartMillis < 300)
+      {
+        ResetLineCounter();
+      }
+    }
+    ResetLineCounter();
   }
 
-  uint32_t StartMillis = millis();
-  while (LineCounter_Left < 1)
-  {
-    Backline(100, 50);
-    CountLine_Left();
-    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
-    {
-      break;
-    }
-    if (millis() - StartMillis < 300)
-    {
-      ResetLineCounter();
-    }
-  }
-  ResetLineCounter();
   FrontLineAligment();
 
   Stop();

@@ -12,7 +12,7 @@ void setup()
   QRScanner.Reset();
   delay(500);
   BlueLED.Off();
-  Buzzer.Beep(2000, 2000);
+  //Buzzer.Beep(2000, 2000);
 
   //=======================================
   //
@@ -23,8 +23,8 @@ void setup()
   //  ##   ##   #####     ##     #####
   //
   //=======================================
-/*
-  Start();
+
+  Start();  
 
   TaskOne_CollectPhase1();
   TaskOne_CollectPhase2();
@@ -43,10 +43,7 @@ void setup()
   TasKTwo_Start();
 
   TaskTwo_MovePhase1();
-  TaskTwo_MovePhase2();*/
-  EPosition = BLACK;
-  Plan = 0;
-  
+  TaskTwo_MovePhase2();  
   TaskTwo_MovePhase3();
 
   TaskTwo_Collect();
