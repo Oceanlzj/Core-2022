@@ -44,7 +44,7 @@ void setup()
 
   TaskTwo_MovePhase1();
   TaskTwo_MovePhase2();*/
-  EPosition = WHITE;
+  EPosition = BLACK;
   Plan = 0;
   
   TaskTwo_MovePhase3();

@@ -822,7 +822,7 @@ void TaskTwo_MovePhase3()
   }
   ResetLineCounter();
   Stop();
-  GoDistance(900, 900);
+  GoDistance(850, 850);
 
   GoDistance(-800, -200);
   GoDistance(-260, 80);
@@ -967,7 +967,7 @@ void TaskTwo_Collect()
   {
     // TODO place White then back to line
     TurnRight180();
-    
+
     ResetLineCounter();
     while (LineCounter < 1)
     {
@@ -1007,7 +1007,7 @@ void TaskTwo_Collect()
       Moveline(100, 50);
       CountLine();
       CountLineBoth();
-      if(LineCounter_Left > 1 || LineCounter_Right > 1)
+      if (LineCounter_Left > 1 || LineCounter_Right > 1)
       {
         break;
       }
@@ -1143,15 +1143,81 @@ void TaskTwo_PlacePhase2_LeftOpen()
 void TaskTwo_PlacePhase3_LeftOpen()
 {
   ResetLineCounter();
-  while (LineCounter_Right < 4)
+  while (LineCounter_Right < 2)
   {
     Moveline(300, 100);
     CountLine_Right();
   }
-  ResetLineCounter();
   Stop();
-  GoDistance(400, 400);
+  ResetLineCounter();
+  if (EPosition == RED)
+  {
+    Stop();
+    GoDistance(400, 400);
 
+    TurnRight90();
+
+    ResetLineCounter();
+    while (LineCounter < 1)
+    {
+      Moveline(300, 100);
+      CountLine();
+    }
+    Stop();
+    ResetLineCounter();
+
+    GoDistance(-200, -200);
+
+    DiskPosition(PLANS[Plan][4] - 1);
+    delay(1000);
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+    ClawClose(2);
+
+    ArmLow(10);
+    ClawOpen(2);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+
+    GoDistance(-200, -200);
+    ArmTop();
+    TurnLeft180();
+
+    GoDistance(-300, -300);
+
+    ResetLineCounter();
+    while (LineCounter < 1)
+    {
+      Moveline(100, 50);
+      CountLine();
+      CountLineBoth();
+      if (LineCounter_Left > 1 || LineCounter_Right > 1)
+      {
+        break;
+      }
+    }
+    Stop();
+    ResetLineCounter();
+    GoDistance(400, 400);
+
+    TurnRight90();
+  }
+
+  ResetLineCounter();
+  while (LineCounter_Right < 2)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+  }
+  Stop();
+  ResetLineCounter();
+
+  GoDistance(400, 400);
   TurnLeft90();
 
   while (LineCounter_Left < 1)
@@ -1198,6 +1264,88 @@ void TaskTwo_PlacePhase4_LeftOpen()
   ResetLineCounter();
   Stop();
 
+  if (EPosition == BLACK)
+  {
+    GoDistance(400, 400);
+    TurnRight135();
+
+    ResetLineCounter();
+    ClearDistance();
+    while (LineCounter < 1)
+    {
+      Go(300);
+      CountLine();
+      CountLineBoth();
+      if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
+      {
+        break;
+      }
+    }
+    ResetLineCounter();
+    Stop();
+    GoDistance(100, 100);
+    while (LineCounter < 3)
+    {
+      Moveline(300, 100);
+      CountLine();
+    }
+    ResetLineCounter();
+    Stop();
+
+    GoDistance(-200, -200);
+
+    DiskPosition(PLANS[Plan][4] - 1);
+    delay(1000);
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+    ClawClose(2);
+
+    ArmLow(10);
+    ClawOpen(2);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+
+    GoDistance(-200, -200);
+    ArmTop();
+
+    ResetLineCounter();
+    while (LineCounter < 3)
+    {
+      Backline(100, 50);
+      CountLine();
+      CountLineBoth();
+      if (LineCounter_Left > 3 || LineCounter_Right > 3)
+      {
+        break;
+      }
+    }
+    Stop();
+    ResetLineCounter();
+
+    TurnLeft135();
+    ResetLineCounter();
+    while (LineCounter_Right < 2)
+    {
+      Backline(300, 100);
+      CountLine_Right();
+    }
+    Stop();
+    ResetLineCounter();
+
+    while (LineCounter_Right < 1)
+    {
+      Moveline(300, 100);
+      CountLine_Right();
+    }
+    Stop();
+    ResetLineCounter();
+  }
+
   GoDistance(-180, -180);
   Stop();
 
@@ -1220,7 +1368,7 @@ void TaskTwo_PlacePhase4_LeftOpen()
   GoDistance(-200, -200);
   ArmTop();
   TurnLeft180();
-
+  //*/
   Stop();
 }
 void FinalHome_LeftOpen()
@@ -1236,6 +1384,39 @@ void FinalHome_LeftOpen()
   GoDistance(400, 400);
 
   TurnLeft90();
+
+  if (EPosition == GREEN)
+  {
+    ResetLineCounter();
+    while (LineCounter < 1)
+    {
+      Moveline(300, 100);
+      CountLine();
+    }
+    Stop();
+    ResetLineCounter();
+
+    GoDistance(-200, -200);
+
+    DiskPosition(PLANS[Plan][4] - 1);
+    delay(1000);
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+    ClawClose(2);
+
+    ArmLow(10);
+    ClawOpen(2);
+
+    ClawClose_R(2);
+    ClawOpen(2);
+    ClawClose_L(2);
+    ClawOpen(2);
+
+    GoDistance(-200, -200);
+    ArmTop();
+  }
 
   BackToHome();
   Stop();
@@ -1357,8 +1538,8 @@ void TaskTwo_PlacePhase3_RightOpen()
       Moveline(300, 100);
       CountLine();
     }
-    ResetLineCounter();
     Stop();
+    ResetLineCounter();
 
     GoDistance(-200, -200);
 
@@ -1390,7 +1571,7 @@ void TaskTwo_PlacePhase3_RightOpen()
       Moveline(100, 50);
       CountLine();
       CountLineBoth();
-      if(LineCounter_Left > 1 || LineCounter_Right > 1)
+      if (LineCounter_Left > 1 || LineCounter_Right > 1)
       {
         break;
       }
@@ -1407,8 +1588,8 @@ void TaskTwo_PlacePhase3_RightOpen()
     Moveline(300, 100);
     CountLine_Left();
   }
-  ResetLineCounter();
   Stop();
+  ResetLineCounter();
 
   GoDistance(400, 400);
   TurnRight90();
@@ -1443,7 +1624,7 @@ void TaskTwo_PlacePhase3_RightOpen()
   GoDistance(-200, -200);
   ArmTop();
   TurnLeft180();
-//*/
+  //*/
   Stop();
 }
 void TaskTwo_PlacePhase4_RightOpen()
