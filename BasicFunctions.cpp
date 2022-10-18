@@ -457,6 +457,7 @@ void Moveline_Edge(int64_t Spd, int64_t Spd_dif)
     break;
 
   case 0:
+    GreenLED.Toggle();
     if (LT_BMID.OnLine())
     {
       if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
@@ -536,7 +537,7 @@ void Rotate(int32_t Distance)
 
 void TurnLeft45()
 {
-  Rotate(-235);
+  Rotate(-240);
 }
 void TurnLeft90()
 {

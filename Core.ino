@@ -80,6 +80,6 @@ void loop()
 {
   BlueLED.Toggle();
   GreenLED.Toggle();
-  Buzzer.Beep(2000, 50);
+  Buzzer.Beep(440, 50);
   delay(200);
 }

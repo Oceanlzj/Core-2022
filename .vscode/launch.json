@@ -1,7 +1,6 @@
 {
     "version": "0.2.0",
     "configurations": [
-      
         {
             "type": "cortex-debug",
             "preLaunchCommands": [],
@@ -10,14 +9,15 @@
             "servertype": "openocd",
             "cwd": "${workspaceRoot}",
             "executable": "Build\\Core.ino.elf",
-            "device": "STM32F103RCT6",
+            "device": "STM32F103RET6",
             "configFiles": [
-                "interface/stlink-v2.cfg",
+                "interface/stlink.cfg",
                 "target/stm32f1x.cfg"
             ],
+            "runToEntryPoint": "main",
             "svdFile": "${workspaceRoot}/.vscode/STM32F103.svd",
             "swoConfig": {
-                "enabled": true,
+                "enabled": false,
                 "cpuFrequency": 8000000,
                 "swoFrequency": 2000000,
                 "source": "probe",

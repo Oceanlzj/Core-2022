@@ -109,6 +109,7 @@ void TaskOne_CollectPhase1()
   }
   ResetLineCounter();
   Stop();
+  GoDistance(50, 50);
 
   TurnLeft45();
 
@@ -268,7 +269,7 @@ void TaskOne_CollectPhase3()
   }
   ResetLineCounter();
   Stop();
-
+  GoDistance(50, 50);
   TurnLeft45();
 
   Stop();
@@ -338,7 +339,7 @@ void TaskOne_CollectPhase4()
   }
   ResetLineCounter();
   Stop();
-
+  GoDistance(50, 50);
   TurnLeft45();
 
   Stop();
@@ -831,6 +832,7 @@ void TaskTwo_MovePhase3()
 
   GoDistance(-800, -200);
   GoDistance(-260, 80);
+  GoDistance(60, 60);
 
   ResetLineCounter();
   while (LineCounter < 1)
@@ -1079,7 +1081,7 @@ void TaskTwo_PlacePhase1_LeftOpen()
   ResetLineCounter();
   while (LineCounter_Left < 2)
   {
-    LeftLine(100, 50);
+    Moveline(100, 50);
     CountLine_Left();
     // CountLineBoth();
   }
@@ -1273,14 +1275,25 @@ void TaskTwo_PlacePhase3_LeftOpen()
 }
 void TaskTwo_PlacePhase4_LeftOpen()
 {
+  uint32_t StartMillis = millis();
   ResetLineCounter();
-  while (LineCounter_Right < 4)
+  while (LineCounter_Right < 3)
   {
     Moveline(300, 100);
     CountLine_Right();
   }
   ResetLineCounter();
+  while (LineCounter_Right < 1)
+  {
+    Moveline(300, 100);
+    CountLine_Right();
+    if(millis()- StartMillis < 900)
+    {
+      ResetLineCounter();
+    }
+  }
   Stop();
+  ResetLineCounter();
 
   if (EPosition == BLACK)
   {
