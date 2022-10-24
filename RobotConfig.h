@@ -13,7 +13,7 @@
 #include "ServoWithStep.h"
 
 #define SPEEDFIXINDEX 1
-#define DISTANCEFIXINDEX 1.02
+#define DISTANCEFIXINDEX 1
 
 #define R_Close 1400
 #define R_Open 2200

@@ -207,7 +207,7 @@ void SetDistance_Back(int64_t Distance_L, int64_t Distance_R)
   MotorR.move(Distance_R * DISTANCEFIXINDEX);
 }
 
-void Moveline(int64_t Spd, int64_t Spd_dif)
+void Goline(int64_t Spd, int64_t Spd_dif)
 {
   switch (GetFrontLine())
   {
@@ -328,82 +328,6 @@ void Backline(int64_t Spd, int64_t Spd_dif)
     {
       SetDistance_Back(Spd, Spd);
     }
-  }
-  MotorL.run();
-  MotorR.run();
-}
-// used for edge
-void Moveline_Edge(int64_t Spd, int64_t Spd_dif)
-{
-  switch (GetFrontLine())
-  {
-  case 1:
-    SetDistance(Spd * 3, 0);
-    break;
-  case 3:
-    SetDistance(Spd * 2, 0);
-    break;
-  case 2:
-    SetDistance(Spd + Spd_dif, 0);
-    break;
-  case 6:
-    SetDistance(Spd, 50);
-    break;
-
-  case 4:
-    SetDistance(Spd + 2.2 * Spd_dif, Spd - Spd_dif);
-    break;
-  case 12:
-    SetDistance(Spd + 2.2 * Spd_dif, Spd);
-    break;
-
-  case 8:
-    SetDistance(Spd, Spd);
-    break;
-
-  case 24:
-    SetDistance(Spd, Spd + 2.2 * Spd_dif);
-    break;
-  case 16:
-    SetDistance(Spd - Spd_dif, Spd + 2.2 * Spd_dif);
-    break;
-
-  case 0:
-    if (LT_BMID.OnLine())
-    {
-      if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
-      {
-        SetDistance(Spd, Spd + Spd_dif * 2);
-      }
-      else if (LT_BLFT.OnLine() && !LT_BRGT.OnLine())
-      {
-        SetDistance(Spd + Spd_dif * 2, Spd);
-      }
-      else
-      {
-        SetDistance(Spd, Spd);
-      }
-    }
-    else
-    {
-      if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
-      {
-        SetDistance(Spd - Spd_dif, Spd + Spd_dif * 2);
-      }
-      else if (LT_BLFT.OnLine() && !LT_BRGT.OnLine())
-      {
-        SetDistance(Spd + Spd_dif * 2, Spd - Spd_dif);
-      }
-      else
-      {
-        SetDistance(Spd, Spd);
-      }
-    }
-    break;
-
-  default:
-    SetDistance(Spd, Spd);
-    break;
   }
   MotorL.run();
   MotorR.run();
@@ -612,11 +536,13 @@ void ArmTop()
   Svo_Arm = ARM_TOP;
   delay(1000);
 }
+
 void ArmTop(uint8_t spd)
 {
   Svo_Arm.Setpos(ARM_TOP, spd);
   delay(500);
 }
+
 void ArmLow()
 {
   Svo_Arm = ARM_LOW;
