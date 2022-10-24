@@ -55,17 +55,6 @@ void ClearDistance()
   MotorR.moveTo(0);
 }
 
-void Chassis(int32_t Spd_L, int32_t Spd_R)
-{
-  // ClearDistance();
-
-  MotorL.setSpeed(Spd_L * SPEEDFIXINDEX);
-  MotorR.setSpeed(-Spd_R * SPEEDFIXINDEX);
-
-  MotorR.runSpeed();
-  MotorL.runSpeed();
-}
-
 void Go(int32_t Dis)
 {
   MotorL.move(Dis);
@@ -154,61 +143,6 @@ uint8_t GetFrontLine()
   Result += LT_RMID.OnLine() ? 1 : 0;
 
   return Result;
-}
-
-void Goline(uint32_t Spd, uint32_t Spd_dif)
-{
-  // Chassis(Spd, Spd);
-  switch (GetFrontLine())
-  {
-  case 1:
-    Chassis(Spd * 3, 0);
-    break;
-  case 3:
-    Chassis(Spd * 2, 0);
-    break;
-  case 2:
-    Chassis(Spd + Spd_dif, 0);
-    break;
-  case 6:
-    Chassis(Spd, 50);
-    break;
-
-  case 4:
-    Chassis(Spd + Spd_dif, Spd - Spd_dif);
-    break;
-  case 12:
-    Chassis(Spd + Spd_dif, Spd);
-    break;
-
-  case 8:
-    Chassis(Spd, Spd);
-    break;
-
-  case 24:
-    Chassis(Spd, Spd + Spd_dif);
-    break;
-  case 16:
-    Chassis(Spd - Spd_dif, Spd + Spd_dif);
-    break;
-
-  case 48:
-    Chassis(50, Spd);
-    break;
-  case 32:
-    Chassis(0, Spd + Spd_dif);
-    break;
-  case 96:
-    Chassis(0, Spd * 2);
-    break;
-  case 64:
-    Chassis(0, Spd * 3);
-    break;
-
-  default:
-    Chassis(Spd, Spd);
-    break;
-  }
 }
 
 void LeftLine(uint32_t Spd, uint32_t Spd_dif)
@@ -321,64 +255,42 @@ void Moveline(int64_t Spd, int64_t Spd_dif)
     SetDistance(0, Spd * 3);
     break;
 
+  case 0:
+    GreenLED.Toggle();
+    if (LT_BMID.OnLine())
+    {
+      if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
+      {
+        SetDistance(Spd, Spd + Spd_dif * 2);
+      }
+      else if (LT_BLFT.OnLine() && !LT_BRGT.OnLine())
+      {
+        SetDistance(Spd + Spd_dif * 2, Spd);
+      }
+      else
+      {
+        SetDistance(Spd, Spd);
+      }
+    }
+    else
+    {
+      if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
+      {
+        SetDistance(Spd - Spd_dif, Spd + Spd_dif * 2);
+      }
+      else if (LT_BLFT.OnLine() && !LT_BRGT.OnLine())
+      {
+        SetDistance(Spd + Spd_dif * 2, Spd - Spd_dif);
+      }
+      else
+      {
+        SetDistance(Spd, Spd);
+      }
+    }
+    break;
+
   default:
     SetDistance(Spd, Spd);
-    break;
-  }
-  MotorL.run();
-  MotorR.run();
-}
-
-void Moveline_Back(int64_t Spd, int64_t Spd_dif)
-{
-  switch (GetFrontLine())
-  {
-  case 1:
-    SetDistance_Back(Spd, 20);
-    break;
-  case 3:
-    SetDistance_Back(Spd, 30);
-    break;
-  case 2:
-    SetDistance_Back(Spd + Spd_dif, 40);
-    break;
-  case 6:
-    SetDistance_Back(Spd, 50);
-    break;
-
-  case 4:
-    SetDistance_Back(Spd + 2.2 * Spd_dif, Spd - Spd_dif);
-    break;
-  case 12:
-    SetDistance_Back(Spd + 2.2 * Spd_dif, Spd);
-    break;
-
-  case 8:
-    SetDistance_Back(Spd, Spd);
-    break;
-
-  case 24:
-    SetDistance_Back(Spd, Spd + 2.2 * Spd_dif);
-    break;
-  case 16:
-    SetDistance_Back(Spd - Spd_dif, Spd + 2.2 * Spd_dif);
-    break;
-
-  case 48:
-    SetDistance_Back(50, Spd);
-    break;
-  case 32:
-    SetDistance_Back(40, Spd + Spd_dif);
-    break;
-  case 96:
-    SetDistance_Back(30, Spd);
-    break;
-  case 64:
-    SetDistance_Back(20, Spd);
-    break;
-
-  default:
-    SetDistance_Back(Spd, Spd);
     break;
   }
   MotorL.run();
@@ -457,7 +369,6 @@ void Moveline_Edge(int64_t Spd, int64_t Spd_dif)
     break;
 
   case 0:
-    GreenLED.Toggle();
     if (LT_BMID.OnLine())
     {
       if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
