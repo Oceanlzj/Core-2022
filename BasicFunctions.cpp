@@ -255,39 +255,6 @@ void Goline(int64_t Spd, int64_t Spd_dif)
     SetDistance(0, Spd * 3);
     break;
 
-  case 0:
-    GreenLED.Toggle();
-    if (LT_BMID.OnLine())
-    {
-      if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
-      {
-        SetDistance(Spd, Spd + Spd_dif * 2);
-      }
-      else if (LT_BLFT.OnLine() && !LT_BRGT.OnLine())
-      {
-        SetDistance(Spd + Spd_dif * 2, Spd);
-      }
-      else
-      {
-        SetDistance(Spd, Spd);
-      }
-    }
-    else
-    {
-      if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
-      {
-        SetDistance(Spd - Spd_dif, Spd + Spd_dif * 2);
-      }
-      else if (LT_BLFT.OnLine() && !LT_BRGT.OnLine())
-      {
-        SetDistance(Spd + Spd_dif * 2, Spd - Spd_dif);
-      }
-      else
-      {
-        SetDistance(Spd, Spd);
-      }
-    }
-    break;
 
   default:
     SetDistance(Spd, Spd);
