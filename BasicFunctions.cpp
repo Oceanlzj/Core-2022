@@ -228,7 +228,7 @@ void Goline(int64_t Spd, int64_t Spd_dif)
     SetDistance(Spd + 2.2 * Spd_dif, Spd - Spd_dif);
     break;
   case 12:
-    SetDistance(Spd + 2.2 * Spd_dif, Spd);
+    SetDistance(Spd + Spd_dif, Spd);
     break;
 
   case 8:
@@ -236,7 +236,7 @@ void Goline(int64_t Spd, int64_t Spd_dif)
     break;
 
   case 24:
-    SetDistance(Spd, Spd + 2.2 * Spd_dif);
+    SetDistance(Spd, Spd +  Spd_dif);
     break;
   case 16:
     SetDistance(Spd - Spd_dif, Spd + 2.2 * Spd_dif);
@@ -255,6 +255,27 @@ void Goline(int64_t Spd, int64_t Spd_dif)
     SetDistance(0, Spd * 3);
     break;
 
+  /*case 0:
+    if (LT_BMID.OnLine())
+    {
+      if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
+      {
+        SetDistance(Spd, Spd + Spd_dif * 2);
+      }
+      else if (LT_BLFT.OnLine() && !LT_BRGT.OnLine())
+      {
+        SetDistance(Spd + Spd_dif * 2, Spd);
+      }
+      else
+      {
+        SetDistance(Spd, Spd);
+      }
+    }
+    else 
+    {
+      SetDistance(Spd, Spd);
+    }
+    break;*/
 
   default:
     SetDistance(Spd, Spd);

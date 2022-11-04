@@ -118,8 +118,17 @@ void TaskOne_CollectPhase1()
 
 void TaskOne_CollectPhase2()
 {
+  GoDistance(100, 100);
   ResetLineCounter();
-  while (LineCounter_Right < 4)
+  while (LineCounter_Right < 2)
+  {
+    Goline(300, 100);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+
+  GoDistance(400, 400);
+  while (LineCounter_Right < 2)
   {
     Goline(300, 100);
     CountLine_Right();
@@ -190,6 +199,7 @@ void TaskOne_CollectPhase2()
 
 void TaskOne_CollectPhase3()
 {
+  GoDistance(100, 100);
   ClearDistance();
   ResetLineCounter();
   uint32_t StartMillis = millis();
@@ -197,7 +207,7 @@ void TaskOne_CollectPhase3()
   {
     LeftLine(300, 100);
     CountLine_Right();
-    if (millis() - StartMillis < 1000)
+    if (millis() - StartMillis < 600)
     {
       ResetLineCounter();
     }
@@ -208,7 +218,7 @@ void TaskOne_CollectPhase3()
   {
     Goline(300, 100);
     CountLine_Right();
-    if (millis() - StartMillis < 1000)
+    if (millis() - StartMillis < 800)
     {
       ResetLineCounter();
     }
@@ -277,8 +287,16 @@ void TaskOne_CollectPhase3()
 
 void TaskOne_CollectPhase4()
 {
+  GoDistance(100, 100);
   ResetLineCounter();
-  while (LineCounter_Right < 4)
+  while (LineCounter_Right < 2)
+  {
+    Goline(300, 100);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+  GoDistance(400, 400);
+  while (LineCounter_Right < 2)
   {
     Goline(300, 100);
     CountLine_Right();
@@ -798,8 +816,16 @@ void TaskTwo_MovePhase1()
 
 void TaskTwo_MovePhase2()
 {
+  GoDistance(100, 100);
   ResetLineCounter();
-  while (LineCounter_Right < 4)
+  while (LineCounter_Right < 2)
+  {
+    Goline(300, 100);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+  GoDistance(400, 400);
+  while (LineCounter_Right < 2)
   {
     Goline(300, 100);
     CountLine_Right();
@@ -814,6 +840,7 @@ void TaskTwo_MovePhase2()
 
 void TaskTwo_MovePhase3()
 {
+  GoDistance(100, 100);
   ClearDistance();
   ResetLineCounter();
   uint32_t StartMillis = millis();
@@ -1078,6 +1105,7 @@ void TaskTwo_Collect()
 
 void TaskTwo_PlacePhase1_LeftOpen()
 {
+  GoDistance(100, 100);
   ResetLineCounter();
   while (LineCounter_Left < 2)
   {
@@ -1113,10 +1141,19 @@ void TaskTwo_PlacePhase1_LeftOpen()
 
   Stop();
 }
+
 void TaskTwo_PlacePhase2_LeftOpen()
 {
+  GoDistance(100, 100);
   ResetLineCounter();
-  while (LineCounter_Right < 4)
+  while (LineCounter_Right < 2)
+  {
+    Goline(100, 50);
+    CountLine_Right();
+  }
+  ResetLineCounter();
+  GoDistance(400, 400);
+  while (LineCounter_Right < 2)
   {
     Goline(100, 50);
     CountLine_Right();
@@ -1162,6 +1199,7 @@ void TaskTwo_PlacePhase2_LeftOpen()
 }
 void TaskTwo_PlacePhase3_LeftOpen()
 {
+  GoDistance(100, 100);
   ResetLineCounter();
   while (LineCounter_Right < 2)
   {
@@ -1275,8 +1313,9 @@ void TaskTwo_PlacePhase3_LeftOpen()
 }
 void TaskTwo_PlacePhase4_LeftOpen()
 {
-  uint32_t StartMillis = millis();
+  GoDistance(100, 100);
   ResetLineCounter();
+  uint32_t StartMillis = millis();
   while (LineCounter_Right < 3)
   {
     Goline(300, 100);

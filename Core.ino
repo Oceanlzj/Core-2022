@@ -3,7 +3,7 @@
 
 void setup()
 {
-  Serial1.begin(115200);
+  Serial1.begin(9600);
   Serial4.begin(115200);
   ColorSensorInit();
   MotorInit();
@@ -30,6 +30,7 @@ void setup()
   TaskOne_CollectPhase2();
   TaskOne_CollectPhase3();
   TaskOne_CollectPhase4();
+  
 
   BackToCenter();
 
