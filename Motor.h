@@ -13,11 +13,7 @@ private:
 public:
   Motor(uint32_t STP, uint32_t DIR, uint32_t EN);
   void Enable();
-  void Disable();
-
-  uint32_t GetCurrentSpeed();
-  void setSpeed(float Speed);
-  
+  void Disable();  
 };
 
 

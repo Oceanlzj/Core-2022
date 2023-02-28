@@ -12,7 +12,7 @@ void setup()
   QRScanner.Reset();
   delay(500);
   BlueLED.Off();
-  //Buzzer.Beep(2000, 2000);
+  // Buzzer.Beep(2000, 2000);
 
   //=======================================
   //
@@ -24,13 +24,12 @@ void setup()
   //
   //=======================================
 
-  Start();  
+  Start();
 
   TaskOne_CollectPhase1();
   TaskOne_CollectPhase2();
   TaskOne_CollectPhase3();
   TaskOne_CollectPhase4();
-  
 
   BackToCenter();
 
@@ -42,15 +41,13 @@ void setup()
   BackToHome();
 
   TasKTwo_Start();
-
   TaskTwo_MovePhase1();
-  TaskTwo_MovePhase2();  
+  TaskTwo_MovePhase2();
   TaskTwo_MovePhase3();
 
   TaskTwo_Collect();
 
-
-  //LeftOpenRoute or RightOpenRoute
+  // LeftOpenRoute or RightOpenRoute
   if (EPosition != BLUE)
   {
     TaskTwo_PlacePhase1_LeftOpen();
@@ -65,14 +62,13 @@ void setup()
     TaskTwo_PlacePhase1_RightOpen();
     TaskTwo_PlacePhase2_RightOpen();
     TaskTwo_PlacePhase3_RightOpen();
-    
     TaskTwo_PlacePhase4_RightOpen();
 
     FinalHome_RightOpen();
   }
-  
 
   //*/
+  // GoDistance(400, 400);
 
   Stop();
 }
@@ -81,6 +77,6 @@ void loop()
 {
   BlueLED.Toggle();
   GreenLED.Toggle();
-  Buzzer.Beep(440, 50);
+  // Buzzer.Beep(440, 50);
   delay(200);
 }

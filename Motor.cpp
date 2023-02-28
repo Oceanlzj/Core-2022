@@ -18,15 +18,3 @@ void Motor::Disable()
 {
   digitalWriteFast(digitalPinToPinName(Pin_EN), LOW);
 }
-
-void Motor::setSpeed(float Speed)
-{
-  if (speed() != Speed)
-  {
-    float CurrentSpeed = speed();
-    float DeltaSpeed = abs(CurrentSpeed - Speed) > 50 ? 50 : abs(CurrentSpeed - Speed);
-    CurrentSpeed = CurrentSpeed > Speed ? CurrentSpeed - DeltaSpeed : CurrentSpeed + DeltaSpeed;
-    this->AccelStepper::setSpeed(CurrentSpeed);
-    //Serial1.println(CurrentSpeed);
-  }
-}

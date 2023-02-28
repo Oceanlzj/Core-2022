@@ -2,17 +2,14 @@
 #define __PCH_H__
 
 #include <Wire.h>
-#include <string>
+//#include <string>
 #include <cstdint>
 #include <Arduino.h>
 #include <HardwareSerial.h>
 
 #include <Servo.h>
 #include <AccelStepper.h>
-#include <Adafruit_Sensor.h>
 #include <Adafruit_TCS34725.h>
-#include <Adafruit_NeoPixel.h>
-#include <Adafruit_HMC5883_U.h>
 
 #include "LED.h"
 #include "Auto.h"

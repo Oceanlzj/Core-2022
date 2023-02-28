@@ -323,17 +323,17 @@ void Backline(int64_t Spd, int64_t Spd_dif)
 
 void FrontLineAligment()
 {
-  while (!LT_LOUT.OnLine() || !LT_RMID.OnLine())
+  while (!LT_LOUT.OnLine() || !LT_ROUT.OnLine())
   {
-    if (LT_LOUT.OnLine() && LT_RMID.OnLine())
+    if (LT_LOUT.OnLine() && LT_ROUT.OnLine())
     {
       break;
     }
-    else if (!LT_LOUT.OnLine() && LT_RMID.OnLine())
+    else if (!LT_LOUT.OnLine() && LT_ROUT.OnLine())
     {
       GoDistance(1, 0);
     }
-    else if (LT_LOUT.OnLine() && !LT_RMID.OnLine())
+    else if (LT_LOUT.OnLine() && !LT_ROUT.OnLine())
     {
       GoDistance(0, 1);
     }
