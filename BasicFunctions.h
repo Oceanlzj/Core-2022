@@ -52,7 +52,8 @@ void ArmLow();
 void ArmLow(uint8_t spd);
 void ArmPush();
 void DiskPosition(Color Color);
-void DiskPosition(uint8_t pos);
+void DiskPosition(uint8_t pos);\
+void ClawPull();
 void PrintALlLineTracker();
 void TurnLeft45();
 void TurnLeft90();

@@ -22,8 +22,13 @@ void Start()
   {
     GoDistance(10, 10);
     CountLine();
+    CountLineBoth();
+    if(LineCounter_Left >= 1 && LineCounter_Right >= 1)
+    {
+      break;
+    }
   }
-  LineCounter = 0;
+  ResetLineCounter();
   Stop();
   delay(100);
   ////Buzzer.Stop();
@@ -49,6 +54,7 @@ void Start()
 void TaskOne_CollectPhase1()
 {
   GoDistance(100, 100);
+  ResetLineCounter();
   while (LineCounter_Right < 2)
   {
     Goline(300, 100);
@@ -127,7 +133,7 @@ void TaskOne_CollectPhase2()
   }
   ResetLineCounter();
 
-  GoDistance(400, 400);
+  GoDistance(350, 450);
   while (LineCounter_Right < 2)
   {
     Goline(300, 100);
@@ -220,13 +226,12 @@ void TaskOne_CollectPhase3()
   {
     LeftLine(300, 100);
   }
-  Stop();
   GoDistance(500, 500);
 
   StartMillis = millis();
   while (LineCounter_Right < 1)
   {
-    Goline(300, 100);
+    Goline(100, 50);
     CountLine_Right();
     if (millis() - StartMillis < 800)
     {
@@ -305,7 +310,7 @@ void TaskOne_CollectPhase4()
     CountLine_Right();
   }
   ResetLineCounter();
-  GoDistance(400, 400);
+  GoDistance(350, 450);
   while (LineCounter_Right < 2)
   {
     Goline(300, 100);
@@ -421,6 +426,7 @@ void TaskOne_PlacePhase1()
     ClawOpen(2);
     ClawClose_L(2);
     ClawOpen(2);
+    ClawPull();
     ClawClose(2);
 
     ResetLineCounter();
@@ -442,7 +448,7 @@ void TaskOne_PlacePhase1()
     }
     ResetLineCounter();
     Stop();
-    GoDistance(-130, -130);
+    GoDistance(-150, -150);
     Stop();
 
     ArmLow(10);
@@ -497,6 +503,7 @@ void TaskOne_PlacePhase2()
     ClawOpen(2);
     ClawClose_L(2);
     ClawOpen(2);
+    ClawPull();
     ClawClose(2);
 
     ResetLineCounter();
@@ -518,7 +525,7 @@ void TaskOne_PlacePhase2()
     }
     ResetLineCounter();
     Stop();
-    GoDistance(-130, -130);
+    GoDistance(-150, -150);
     Stop();
 
     ArmLow(10);
@@ -574,6 +581,7 @@ void TaskOne_PlacePhase3()
     ClawOpen(2);
     ClawClose_L(2);
     ClawOpen(2);
+    ClawPull();
     ClawClose(2);
 
     ResetLineCounter();
@@ -595,7 +603,7 @@ void TaskOne_PlacePhase3()
     }
     ResetLineCounter();
     Stop();
-    GoDistance(-130, -130);
+    GoDistance(-150, -150);
     Stop();
 
     ArmLow(10);
@@ -672,6 +680,7 @@ void TaskOne_PlacePhase4()
     ClawOpen(2);
     ClawClose_L(2);
     ClawOpen(2);
+    ClawPull();
     ClawClose(2);
     GoDistance(-200, -200);
 
@@ -718,8 +727,9 @@ void TaskOne_PlacePhase4()
     ClawOpen(2);
     ClawClose_L(2);
     ClawOpen(2);
+    ClawPull();
     ClawClose(2);
-    GoDistance(-200, -200);
+    GoDistance(-230, -230);
 
     ArmLow(10);
     ClawOpen(2);
@@ -743,19 +753,19 @@ void BackToHome()
 {
   ResetLineCounter();
   ClearDistance();
-  while (LineCounter < 2)
+  while (LineCounter < 1)
   {
     Backline(100, 50);
     CountLine();
     CountLineBoth();
-    if (LineCounter_Left >= 2 && LineCounter_Right >= 2)
+    if (LineCounter_Left >= 1 && LineCounter_Right >= 1)
     {
       break;
     }
   }
   ResetLineCounter();
 
-  GoDistance(-200, -200);
+  GoDistance(-400, -400);
 
   Stop();
 }
@@ -1039,6 +1049,7 @@ void TaskTwo_Collect()
     ClawOpen(2);
     ClawClose_L(2);
     ClawOpen(2);
+    ClawPull();
     ClawClose(2);
 
     ArmLow(10);
@@ -1129,6 +1140,7 @@ void TaskTwo_PlacePhase1_LeftOpen()
   ClawOpen(2);
   ClawClose_L(2);
   ClawOpen(2);
+  ClawPull();
   ClawClose(2);
 
   ArmLow(10);
@@ -1192,7 +1204,7 @@ void TaskTwo_PlacePhase2_LeftOpen()
   }
   LineCounter_Left = 0;
   // Buzzer.Stop();
-  GoDistance(-200, -200);
+  GoDistance(-210, -210);
   Stop();
 
   DiskPosition(PLANS[Plan][1] - 1);
@@ -1201,6 +1213,7 @@ void TaskTwo_PlacePhase2_LeftOpen()
   ClawOpen(2);
   ClawClose_L(2);
   ClawOpen(2);
+  ClawPull();
   ClawClose(2);
 
   ArmLow(10);
@@ -1243,7 +1256,7 @@ void TaskTwo_PlacePhase3_LeftOpen()
     Stop();
     ResetLineCounter();
 
-    GoDistance(-200, -200);
+    GoDistance(-210, -210);
 
     DiskPosition(PLANS[Plan][4] - 1);
     delay(1000);
@@ -1251,6 +1264,7 @@ void TaskTwo_PlacePhase3_LeftOpen()
     ClawOpen(2);
     ClawClose_L(2);
     ClawOpen(2);
+    ClawPull();
     ClawClose(2);
 
     ArmLow(10);
@@ -1320,6 +1334,7 @@ void TaskTwo_PlacePhase3_LeftOpen()
   ClawOpen(2);
   ClawClose_L(2);
   ClawOpen(2);
+  ClawPull();
   ClawClose(2);
 
   ArmLow(10);
@@ -1396,6 +1411,7 @@ void TaskTwo_PlacePhase4_LeftOpen()
     ClawOpen(2);
     ClawClose_L(2);
     ClawOpen(2);
+    ClawPull();
     ClawClose(2);
 
     ArmLow(10);
@@ -1463,6 +1479,7 @@ void TaskTwo_PlacePhase4_LeftOpen()
   ClawOpen(2);
   ClawClose_L(2);
   ClawOpen(2);
+  ClawPull();
   ClawClose(2);
 
   ArmLow(10);
@@ -1512,6 +1529,7 @@ void FinalHome_LeftOpen()
     ClawOpen(2);
     ClawClose_L(2);
     ClawOpen(2);
+    ClawPull();
     ClawClose(2);
 
     ArmLow(10);
@@ -1569,6 +1587,7 @@ void TaskTwo_PlacePhase1_RightOpen()
   ClawOpen(2);
   ClawClose_L(2);
   ClawOpen(2);
+  ClawPull();
   ClawClose(2);
 
   ArmLow(10);
@@ -1601,11 +1620,22 @@ void TaskTwo_PlacePhase2_RightOpen()
   GoDistance(400, 350);
   Stop();
   GoDistance(200, 200);
-
-  while (LineCounter_Left < 2)
+  ResetLineCounter();
+  while (LineCounter_Left < 1)
   {
     Goline(100, 50);
     CountLine_Left();
+  }
+  ResetLineCounter();
+  uint32_t StartMillis = millis();
+  while (LineCounter_Left < 1)
+  {
+    Goline(100, 50);
+    CountLine_Left();
+    if(millis() - StartMillis < 1500)
+    {
+      ResetLineCounter();
+    }
   }
 
   ResetLineCounter();
@@ -1623,7 +1653,7 @@ void TaskTwo_PlacePhase2_RightOpen()
   }
   LineCounter_Right = 0;
   // Buzzer.Stop();
-  GoDistance(-200, -200);
+  GoDistance(-220, -220);
   Stop();
 
   DiskPosition(PLANS[Plan][0] - 1);
@@ -1632,6 +1662,7 @@ void TaskTwo_PlacePhase2_RightOpen()
   ClawOpen(2);
   ClawClose_L(2);
   ClawOpen(2);
+  ClawPull();
   ClawClose(2);
   delay(300);
 
@@ -1669,13 +1700,13 @@ void TaskTwo_PlacePhase3_RightOpen()
     ResetLineCounter();
     while (LineCounter < 1)
     {
-      Goline(300, 100);
+      Goline(100, 50);
       CountLine();
     }
     Stop();
     ResetLineCounter();
 
-    GoDistance(-200, -200);
+    GoDistance(-210, -210);
 
     DiskPosition(PLANS[Plan][4] - 1);
     delay(1000);
@@ -1683,6 +1714,7 @@ void TaskTwo_PlacePhase3_RightOpen()
     ClawOpen(2);
     ClawClose_L(2);
     ClawOpen(2);
+    ClawPull();
     ClawClose(2);
 
     ArmLow(10);
@@ -1694,7 +1726,7 @@ void TaskTwo_PlacePhase3_RightOpen()
     ClawClose_L(2);
     ClawOpen(2);
 
-    GoDistance(-200, -200);
+    GoDistance(-220, -220);
     ArmTop();
     TurnLeft180();
 
@@ -1751,6 +1783,7 @@ void TaskTwo_PlacePhase3_RightOpen()
   ClawOpen(2);
   ClawClose_L(2);
   ClawOpen(2);
+  ClawPull();
   ClawClose(2);
 
   ArmLow(10);
@@ -1803,6 +1836,7 @@ void TaskTwo_PlacePhase4_RightOpen()
   ClawOpen(2);
   ClawClose_L(2);
   ClawOpen(2);
+  ClawPull();
   ClawClose(2);
 
   ArmLow(10);
@@ -1813,7 +1847,7 @@ void TaskTwo_PlacePhase4_RightOpen()
   ClawClose_L(2);
   ClawOpen(2);
 
-  GoDistance(-200, -200);
+  GoDistance(-220, -220);
   ArmTop();
   TurnLeft180();
 

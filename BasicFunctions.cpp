@@ -236,7 +236,7 @@ void Goline(int64_t Spd, int64_t Spd_dif)
     break;
 
   case 24:
-    SetDistance(Spd, Spd +  Spd_dif);
+    SetDistance(Spd, Spd + Spd_dif);
     break;
   case 16:
     SetDistance(Spd - Spd_dif, Spd + 2.2 * Spd_dif);
@@ -255,27 +255,27 @@ void Goline(int64_t Spd, int64_t Spd_dif)
     SetDistance(0, Spd * 3);
     break;
 
-  /*case 0:
-    if (LT_BMID.OnLine())
-    {
-      if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
+    /*case 0:
+      if (LT_BMID.OnLine())
       {
-        SetDistance(Spd, Spd + Spd_dif * 2);
-      }
-      else if (LT_BLFT.OnLine() && !LT_BRGT.OnLine())
-      {
-        SetDistance(Spd + Spd_dif * 2, Spd);
+        if (!LT_BLFT.OnLine() && LT_BRGT.OnLine())
+        {
+          SetDistance(Spd, Spd + Spd_dif * 2);
+        }
+        else if (LT_BLFT.OnLine() && !LT_BRGT.OnLine())
+        {
+          SetDistance(Spd + Spd_dif * 2, Spd);
+        }
+        else
+        {
+          SetDistance(Spd, Spd);
+        }
       }
       else
       {
         SetDistance(Spd, Spd);
       }
-    }
-    else 
-    {
-      SetDistance(Spd, Spd);
-    }
-    break;*/
+      break;*/
 
   default:
     SetDistance(Spd, Spd);
@@ -519,6 +519,18 @@ void ClawOpen(uint16_t Spd)
   Svo_Right.writeMicroseconds(R_Open);
 }
 
+void ClawPull()
+{
+  ClawClose_R(2);
+  ClawOpen(2);
+  ClawClose_L(2);
+  ClawOpen(2);
+  ClawClose_R(2);
+  ClawOpen(2);
+  ClawClose_L(2);
+  ClawOpen(2);
+}
+
 void ArmTop()
 {
   Svo_Arm = ARM_TOP;
@@ -551,7 +563,7 @@ void ArmLow(uint8_t spd)
   delay(500);
 }
 
-const uint16_t DISK_POS[6] = {560, 1020, 1520, 2040, 2480, 0};
+const uint16_t DISK_POS[6] = {560, 1020, 1520, 2020, 2480, 0};
 void DiskPosition(Color Color)
 {
   Svo_Disk = DISK_POS[Color];

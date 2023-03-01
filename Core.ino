@@ -41,6 +41,7 @@ void setup()
   BackToHome();
 
   TasKTwo_Start();
+  
   TaskTwo_MovePhase1();
   TaskTwo_MovePhase2();
   TaskTwo_MovePhase3();
