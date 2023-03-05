@@ -19,9 +19,9 @@
 #define R_Open 2200
 #define L_Close 1700
 #define L_Open 800
-#define ARM_TOP 590
-#define ARM_PUSH 530
-#define ARM_LOW 1880
+#define ARM_TOP 560
+#define ARM_PUSH 500
+#define ARM_LOW 1830
 
 #define LT_THRESHOLD 200
 

@@ -525,10 +525,10 @@ void ClawPull()
   ClawOpen(2);
   ClawClose_L(2);
   ClawOpen(2);
-  ClawClose_R(2);
-  ClawOpen(2);
-  ClawClose_L(2);
-  ClawOpen(2);
+  // ClawClose_R(2);
+  // ClawOpen(2);
+  // ClawClose_L(2);
+  // ClawOpen(2);
 }
 
 void ArmTop()

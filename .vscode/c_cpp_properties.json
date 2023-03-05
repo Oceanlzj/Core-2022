@@ -19,7 +19,7 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "d:\\Banyun2022\\Core",
+                "D:\\Data\\Banyun2022\\Core",
                 "C:\\Users\\Ocean\\AppData\\Local\\Arduino15\\packages\\STMicroelectronics\\hardware\\stm32\\2.3.0\\cores\\arduino\\avr",
                 "C:\\Users\\Ocean\\AppData\\Local\\Arduino15\\packages\\STMicroelectronics\\hardware\\stm32\\2.3.0\\cores\\arduino\\stm32",
                 "C:\\Users\\Ocean\\AppData\\Local\\Arduino15\\packages\\STMicroelectronics\\hardware\\stm32\\2.3.0\\cores\\arduino\\stm32\\LL",
@@ -67,7 +67,7 @@
                 "USE_FULL_LL_DRIVER",
                 "NDEBUG",
                 "STM32F1xx",
-                "ARDUINO=10819",
+                "ARDUINO=10607",
                 "ARDUINO_GENERIC_F103RETX",
                 "ARDUINO_ARCH_STM32",
                 "BOARD_NAME=\"GENERIC_F103RETX\"",
